@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureLab | Vulnerable Entry</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --vuln-red: #ff4d4d;
+            --dark-bg: #0f0f0f;
+        }
+        body { 
+            background-color: var(--dark-bg);
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            background-image: radial-gradient(circle, #220000 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .login-card { 
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem;
+            border-radius: 0px; /* Keskin köşeler daha teknik durur */
+            border: 2px solid var(--vuln-red);
+            background: rgba(15, 15, 15, 0.9);
+            box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
+            position: relative;
+        }
+        .login-card::before {
+            content: "UNSECURE ENVIRONMENT";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--vuln-red);
+            color: black;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 8px;
+        }
+        .form-control {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: var(--vuln-red);
+            border-radius: 0;
+        }
+        .form-control:focus {
+            background: #222;
+            border-color: var(--vuln-red);
+            color: #fff;
+            box-shadow: none;
+        }
+        .btn-danger {
+            background: var(--vuln-red);
+            border: none;
+            border-radius: 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-danger:hover {
+            background: #cc0000;
+            box-shadow: 0 0 15px var(--vuln-red);
+        }
+        .glitch-text {
+            color: var(--vuln-red);
+            text-shadow: 2px 2px #550000;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .scanner-line {
+            width: 100%;
+            height: 2px;
+            background: var(--vuln-red);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+            animation: scan 3s infinite linear;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <div class="login-card">
+            <div class="scanner-line"></div>
+            <h2 class="text-center mb-1 glitch-text">SecureLab v1.0</h2>
+            <p class="text-center mb-4 small text-secondary">Target: Vulnerable User Management</p>
+            
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label small">USER_IDENTIFIER</label>
+                    <input type="text" name="username" class="form-control" placeholder="e.g. admin' --" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small">ACCESS_KEY</label>
+                    <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-danger w-100">EXECUTE LOGIN</button>
+            </form>
+
+            <div class="mt-4 p-2 border border-secondary">
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-danger me-2">!]</span>
+                    <small class="text-secondary" style="font-size: 11px;">
+                        SYSTEM STATUS: <span class="text-danger">A05:2025_INJECTION_DETECTED</span>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

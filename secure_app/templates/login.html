@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureLab | Protected Environment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --secure-blue: #00d2ff;
+            --secure-green: #00ff88;
+            --deep-navy: #0a192f;
+        }
+        body { 
+            background-color: var(--deep-navy);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            color: #e6f1ff;
+            background-image: 
+                linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
+        .login-card { 
+            width: 100%;
+            max-width: 420px;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 210, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-card::before {
+            content: "SECURE ENVIRONMENT";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secure-blue), var(--secure-green));
+        }
+        .shield-icon {
+            font-size: 3rem;
+            background: linear-gradient(to bottom, var(--secure-blue), var(--secure-green));
+            
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .form-control {
+            background: rgba(10, 25, 47, 0.5);
+            border: 1px solid #233554;
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .form-control:focus {
+            background: rgba(10, 25, 47, 0.8);
+            border-color: var(--secure-blue);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+        }
+        .btn-secure {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            padding: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s;
+        }
+        .btn-secure:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.4);
+            color: #fff;
+        }
+        .status-badge {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--secure-green);
+            color: var(--secure-green);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .pulse-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--secure-green);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px var(--secure-green);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <div class="login-card">
+            <div class="text-center mb-4">
+                <div class="shield-icon">🛡️</div>
+                <h2 class="fw-bold mb-1" style="letter-spacing: -1px;">SecureLab <span style="color: var(--secure-blue);">Pro</span></h2>
+                <div class="mt-2">
+                    <span class="status-badge">
+                        <span class="pulse-dot"></span>ENCRYPTED SESSION
+                    </span>
+                </div>
+            </div>
+            
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label small text-muted">Kullanıcı Kimliği</label>
+                    <input type="text" name="username" class="form-control" placeholder="Kullanıcı adınız" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small text-muted">Güvenlik Anahtarı</label>
+                    <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-secure w-100">GÜVENLİ GİRİŞ</button>
+            </form>
+
+            <div class="mt-4 text-center">
+                <p class="text-muted" style="font-size: 11px;">
+                    Güvenlik Katmanları: <br>
+                    <span class="text-info">Parameterized Queries</span> • <span class="text-info">Bcrypt Hashing</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

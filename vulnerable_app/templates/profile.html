@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureLab | System Leak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0d0000; color: #ff4d4d; font-family: 'JetBrains Mono', monospace; }
+        .navbar { border-bottom: 2px solid #ff4d4d; background: #1a0000 !important; }
+        .card { 
+            background: rgba(20, 0, 0, 0.9); 
+            border: 1px solid #ff4d4d; 
+            border-radius: 0;
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
+        }
+        .header-box { background: #ff4d4d; color: black; padding: 5px 15px; font-weight: bold; margin-bottom: 20px; }
+        .form-control { 
+            background: #1a0000; border: 1px solid #440000; color: #ff4d4d; border-radius: 0;
+        }
+        .form-control:focus { background: #250000; border-color: #ff4d4d; color: white; box-shadow: none; }
+        .btn-vuln { background: #ff4d4d; color: black; border-radius: 0; font-weight: bold; width: 100%; transition: 0.3s; }
+        .btn-vuln:hover { background: #cc0000; color: white; }
+        .leak-info { font-size: 0.85rem; border-left: 3px solid #ff4d4d; padding-left: 10px; margin: 20px 0; }
+        .danger-text { color: #ff4d4d; text-shadow: 0 0 5px #ff0000; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark mb-5">
+        <div class="container">
+            <span class="navbar-brand fw-bold danger-text">⚠️ VULNERABLE_ACCESS_GRANTED</span>
+            <a href="/" class="btn btn-outline-danger btn-sm">LOGOUT_SESSION</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card p-4 shadow-lg">
+                    <div class="header-box text-center">OBJECT_DATA_EXPOSED</div>
+                    <div class="row">
+                        <div class="col-md-4 text-center border-end border-secondary">
+                            <div class="mb-3 p-3 border border-danger">
+                                <span style="font-size: 50px;">👤</span>
+                            </div>
+                            <h4 class="mt-2 text-white">{{ user['username'] }}</h4>
+                            <span class="badge bg-danger">ROLE: {{ user['role'] }}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="leak-info">
+                                <p class="mb-1"><strong>USER_ID:</strong> <span class="text-white">{{ user['id'] }}</span></p>
+                                <p class="mb-1 text-secondary small">Vuln: A01:IDOR - Anyone can change the URL ID to view this.</p>
+                                <hr class="bg-danger">
+                                <p><strong>HAKKIMDA (RAW_HTML):</strong></p>
+                                <div class="p-2 border border-secondary text-white bg-dark">
+                                    {{ user['bio'] | safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="form-label small">DATABASE_UPDATE_STRING (XSS_INPUT)</label>
+                        <form action="/update_bio" method="POST">
+                            <input type="hidden" name="user_id" value="{{ user['id'] }}">
+                            <textarea name="bio" class="form-control mb-3" rows="3" placeholder="Paste <script>alert('XSS')</script> here..."></textarea>
+                            <button type="submit" class="btn btn-vuln">INJECT_NEW_BIO</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
