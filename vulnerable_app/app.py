@@ -21,7 +21,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         conn = get_db_connection()
-        # A05: Injection açığı (f-string kullanımı)
+        # A05: Injection açığı (f-string kullanımı)  / # A05: Injection vulnerability (f-string usage)
         query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
         user = conn.execute(query).fetchone()
         conn.close()
@@ -33,11 +33,11 @@ def login():
 @app.route('/profile/<int:user_id>', methods=['GET'])
 def profile(user_id):
     conn = get_db_connection()
-    # A01: IDOR açığı (Oturum kontrolü yok)
+    # A01: IDOR açığı (Oturum kontrolü yok) / A01: IDOR vulnerability (No session control)
     user = conn.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
     conn.close()
     if user:
-        # A03: Stored XSS açığı (render_template_string kullanımı)
+        # A03: Stored XSS açığı (render_template_string kullanımı) / A03: Stored XSS vulnerability (render_template_string usage)
         html_template = f"""
         <!DOCTYPE html>
         <html lang="tr">

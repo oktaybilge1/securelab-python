@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark mb-5">
         <div class="container">
             <span class="navbar-brand fw-bold">🛡️ SecureLab <span class="fw-light">Pro</span></span>
-            <a href="/logout" class="btn btn-light btn-sm rounded-pill px-4">Güvenli Çıkış</a>
+            <a href="/logout" class="btn btn-light btn-sm rounded-pill px-4">Safe Exit</a>
         </div>
     </nav>
 
@@ -34,27 +34,27 @@
                             <span style="font-size: 60px; background: white; border-radius: 50%; padding: 10px;">👤</span>
                         </div>
                         <h2 class="mb-1">{{ user['username'] }}</h2>
-                        <span class="badge badge-secure px-3 py-2 text-uppercase">GÜVENLİ OTURUM: {{ user['role'] }}</span>
+                        <span class="badge badge-secure px-3 py-2 text-uppercase">SECURE SESSION: {{ user['role'] }}</span>
                     </div>
                     <div class="card-body p-5">
                         <div class="row">
                             <div class="col-md-7 border-end pe-4">
-                                <h5 class="fw-bold mb-3 text-primary">Hesap Bilgileri</h5>
+                                <h5 class="fw-bold mb-3 text-primary">Account Information</h5>
                                 <div class="bio-box mb-3">
                                     <p class="mb-0 text-muted">{{ bio }}</p>
                                 </div>
                                 <div class="security-check">
                                     <div class="d-flex align-items-center">
                                         <div class="text-success me-3">✔️</div>
-                                        <div><strong>Uçtan Uca Güvenlik:</strong> Output encoding aktif. XSS ve IDOR girişimleri sunucu seviyesinde engellenmiştir.</div>
+                                        <div><strong>End-to-End Security:</strong> Output encoding is enabled. XSS and IDOR attempts are blocked at the server level..</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-5 ps-md-4">
-                                <h5 class="fw-bold mb-3 text-primary">Bilgi Güncelleme</h5>
+                                <h5 class="fw-bold mb-3 text-primary">Information Update</h5>
                                 <form action="/update_bio" method="POST">
-                                    <textarea name="bio" class="form-control mb-3" rows="4" placeholder="Kendinizden bahsedin..."></textarea>
-                                    <button type="submit" class="btn btn-secure">DEĞİŞİKLİKLERİ KAYDET</button>
+                                    <textarea name="bio" class="form-control mb-3" rows="4" placeholder="Tell me about yourself..."></textarea>
+                                    <button type="submit" class="btn btn-secure">SAVE CHANGES</button>
                                 </form>
                                 <p class="text-center mt-3 small text-muted">A01:2025 Broken Access Control Protection Active</p>
                             </div>
